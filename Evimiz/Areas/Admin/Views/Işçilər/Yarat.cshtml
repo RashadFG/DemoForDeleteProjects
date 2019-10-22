@@ -1,0 +1,42 @@
+﻿@model AdminEmployeeViewModel
+@{
+    ViewData["Title"] = "Siyahı";
+}
+<h3 class="mb-5">Yeni işçi yarat</h3>
+
+<form method="post" class="row">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="col-12 form-group">
+        <input asp-for="Username" class="form-control" placeholder="İstifadəçi adı">
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="col-12 form-group">
+        <input asp-for="Email" class="form-control" placeholder="Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="col-12 form-group">
+        <input asp-for="Password" class="form-control" placeholder="Şifrə">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="col-12 form-group">
+        <input asp-for="ConfirePassword" class="form-control" placeholder="Təsdiq şifrəsi">
+        <span asp-validation-for="ConfirePassword" class="text-danger"></span>
+    </div>
+    <div class="col-12 form-group">
+        <select asp-for="RoleId" asp-items="@(new SelectList(ViewBag.Roles, "Id", "Name"))" class="form-control"></select>
+    </div>
+
+    @*<div class="col-12 form-group" style="display:none">
+        <select asp-for="NumberKeyCodeId" asp-items="@(new SelectList(ViewBag.NumberKeyCodes , "Id", "Kcode"))" class="form-control"></select>
+    </div>*@
+
+    <div class="col-12 form-group">
+        <input type="submit" class="form-group btn btn-primary btn-block" value="Təsdiqlə">
+    </div>
+</form>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

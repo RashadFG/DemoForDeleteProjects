@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<ApplicationUser>
+@inject UserManager<ApplicationUser>   AppplicationUser
+
+@{
+    ViewData["Title"] = "RoleSiyahı";
+    var number = 1;
+}
+
+<h2>Isçilər Siyahısı</h2>
+
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <div class="col-12">
+                <a asp-controller="Işçilər" asp-action="Yarat" class="btn btn-click btn-block btn-primary text-white">Isci yarat</a>
+            </div>
+
+            @if (Model.Count() != 0)
+            {
+                <thead>
+                    <tr>
+                        <th scope="col">N#</th>
+                        <th scope="col" class="text-right">Ad</th>
+                        <th scope="col" class="text-right">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th>@(number++)</th>
+                            <td class="text-right">@item.Firstname</td>
+                            <td class="text-right">@item.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            }
+            else
+            {
+                <div class="col-12 text-center " style="height:100px;">Hal hazırda işçi yoxdur</div>
+            }
+
+        </table>
+    </div>
+</div>
+

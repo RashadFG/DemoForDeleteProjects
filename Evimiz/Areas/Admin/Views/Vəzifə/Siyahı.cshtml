@@ -1,0 +1,38 @@
+﻿@model IEnumerable<IdentityRole>
+
+    @{
+        ViewData["Title"] = "Siyahı";
+        var number = 1;
+
+    }
+
+    <h2>Siyahı</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a asp-area="Admin" asp-controller="Vəzifə" asp-action="Yarat" class="btn btn-click btn-block btn-primary">Vəzifə yarat</a>
+            </div>
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">N#</th>
+                            <th scope="col" class="text-right">Vəzifə</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>@(number++)</td>
+                            <td class="text-right">@item.Name</td>
+                        </tr>
+                                }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+

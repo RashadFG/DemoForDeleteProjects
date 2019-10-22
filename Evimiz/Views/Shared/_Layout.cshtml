@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daşınmaz əmlakın kirayəsi">
+    <meta name="keywords"
+          content="kiraye,icare,satish,dashinmaz,emlak,mulk,menzil,ev,villa,bag,torpaq,qaraj,ofis,obyekt,ayliq,gunluk,reklam,rent,house,home,estate,garden,property,sale">
+    <meta name="author" content="Rəşad Quluzadə">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="~/Images/property-icon.jpg" />
+    <title>Evimiz.az</title>
+    <!-- <link  href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    @if (ViewBag.Edit == "DüzəlişEt")
+    {
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    }
+    <link rel="stylesheet" href="~/font/stylesheet.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="preloader d-flex justify-content-center align-items-center">
+        <img src="~/Images/building_loader.gif" class="img-fluid">
+    </div>
+    <input type="hidden" value="@ViewBag.Cookie" class="Cookie" />
+    <!-- mobile version  start -->
+    <div class="d-none  align-items-center moblie-dropdown  p-0 ">
+        <div class="col-12 ">
+            <div class="row justify-content-center  py-5">
+                <div class="col-md-6 col-8 ">
+                    <div class="row">
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="AnaSəhifə"><i class="fas fa-home mr-2 color-blue"></i>Əsas səhifə</a></div>
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="Xəbərlər"> <i class="far fa-newspaper mr-2 color-blue"></i>Xəbərlər</a> </div>
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="Əmlakçılar"><i class="far fa-handshake mr-2 color-blue"></i> Əmlakçılar</a></div>
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="Haqqımızda"><i class="fas fa-info-circle  mr-2 color-blue"></i> Haqqımızda</a></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-8 ">
+                    <div class="row justify-content-center">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="col-9">
+                                <div class="items mt-2">
+                                    <a asp-controller="Hesab" asp-action="DaxilOl"><i class="fas fa-sign-in-alt"></i> Daxil ol</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="items mt-2">
+                                    <a asp-controller="Hesab" asp-action="Qeydiyat"><i class="fas fa-user-plus"></i> Qeydiyat</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-9">
+                                <div class="items  mt-2">
+                                    <a asp-controller="Hesab" asp-action="Çıxış"> <i class="fas fa-sign-out-alt"></i> Çıxış</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="items  mt-2">
+                                    <a asp-controller="Evimiz" asp-action="Profilim"> <i class="fas fa-user-circle"></i> Profilim</a>
+                                </div>
+                            </div>
+
+                        }
+                        <div class="col-9">
+                            <div class=" single-item mt-2">
+                                <a asp-controller="Elan" asp-action="Yarat"><i class="fas fa-plus"></i> Elan ver</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i class="fas fa-times close-phone-menu-list fa-2x"></i>
+    </div>
+    <!-- mobile version  end -->
+    <!-- header start -->
+    <header class="header-home">
+        <div class="container-fluid p-0">
+            <div class="container ">
+                <!-- deskopt -->
+                <div class="row Header">
+                    <div class="col-lg-3  col-6 ">
+                        <a asp-controller="Evimiz" asp-action="AnaSəhifə">
+                            <img src="~/Images/property-icon.jpg" class="img-fluid img-logo">
+                            <span class="logo">E v i m i z</span>
+                        </a>
+                    </div>
+                    <div class="col-9 d-none d-lg-block">
+                        <ul class="d-flex justify-content-end header-ul ">
+                            <li><a asp-controller="Evimiz" asp-action="AnaSəhifə"><i class="fas fa-home mr-2 color-blue"></i>Əsas səhifə</a></li>
+                            <li><a asp-controller="Evimiz" asp-action="Xəbərlər"> <i class="far fa-newspaper mr-2 color-blue"></i>Xəbərlər</a></li>
+                            <li><a asp-controller="Evimiz" asp-action="Əmlakçılar"><i class="far fa-handshake mr-2 color-blue"></i> Əmlakçılar</a></li>
+                            <li><a asp-controller="Evimiz" asp-action="Haqqımızda"><i class="fas fa-info-circle  mr-2 color-blue"></i>Haqqımızda</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6  d-lg-none p-0">
+                        <div class="d-flex justify-content-end Menu">
+                            <div class="iconBorder d-flex justify-content-center align-items-center">
+                                <i class="fas fa-bars"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header start -->
+    @if (ViewBag.Home == "Home")
+    {
+        <!-- slider start -->
+        <section id="slider">
+            <div class="container">
+                <div class="row p-0">
+                    <div class="col-12 p-0">
+                        <div class="window">
+                            <ul class="d-flex slider-lent">
+                                <li>
+                                    <a href="~/#">
+                                        <img src="~/Images/2.jpg" class="img-fluid w-100">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/#">
+                                        <img src="~/Images/photo-1512917774080-9991f1c4c750 (1).jpg" class="img-fluid w-100">
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="~/#">
+                                        <img src="~/Images/contemporary-exterior.jpg" class="img-fluid w-100">
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="~/#">
+                                        <img src="~/Images/5.jpg" class="img-fluid w-100">
+                                    </a>
+
+                                </li>
+                            </ul>
+                            <div class=" d-lg-none d-block  Arrows">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <i class="fas fa-angle-left arrow-left "></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <i class="fas fa-angle-right arrow-right "></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="overlay-sldier"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- slider start -->
+    }
+
+    <!-- search-box start -->
+    <section id="search-box">
+        <div class="container ">
+            @if (ViewBag.Home == "Home")
+            {
+                <!-- Koplexlər -->
+                <div class="row ">
+                    <div class="col-12">
+                        <ul class="d-flex left-ul">
+                            <li class="active box-shadow-f" data-id="1"><i class="fas fa-search mr-2  "></i>Axtarış</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- Satış -->
+                <div class="d-none  under-tabs tab-active" data-id="1">
+                    <div class="row ">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control category-search" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                                <option value="0">Əmlakın növü</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control room-search" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))">
+                                <option value="0">Otaq sayı</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control region-search" asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))"></select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="Btn-first">
+                                <div class="btn-overlay"></div>
+                                <input class=" btn btn-block btn-search" type="submit" value="Axtar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- Addres -->
+            <div class="logIn-register d-none">
+                <div class="row ">
+                    <div class="col-md-6 ">
+                        <div class="col-12">
+                            <p class="m-0">
+                                Əlaqə: +994 12 579 04 02, <br class="d-lg-none d-block">Reklam: +994 51 373
+                                92 77
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <p class="m-0">
+                                İş saatları: 1-5- ci günlər. 9:00-19:00,<br class="d-lg-none d-block"> 6 ci
+                                gun
+                                9:00 - 14:00
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="row m-0">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Hesab" asp-action="DaxilOl"><i class="fas fa-sign-in-alt"></i> Daxil ol</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Hesab" asp-action="Seçim"><i class="fas fa-user-plus"></i> Qeydiyat</a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Hesab" asp-action="Çıxış"> <i class="fas fa-sign-out-alt"></i> Çıxış</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Evimiz" asp-action="Profilim"> <i class="fas fa-user-circle"></i> Profilim</a>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-lg-4 col-12">
+                                <div class=" single-item">
+                                    <a asp-controller="Elan" asp-action="Yarat"><i class="far fa-plus-square fa-1x"></i> Elan ver</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- search-box end -->
+
+    @RenderBody()
+
+    <!-- footer start -->
+    <footer>
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-lg-6 col-12">
+                    <div class="row ">
+                        <div class="col-6 mt-2">
+                            <ul>
+                                <span class="F-header">Umumi </span>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="AnaSəhifə">Əsas səhifə</a> </li>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Xəbərlər">Xəbərlər</a> </li>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Əmlakçılar">Əmlakçılar</a> </li>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Haqqımızda">Haqqımızda</a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-6 mt-2">
+                            <ul>
+                                <span class="F-header">Elanlar </span>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllUsual">Elanlar</a></li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="Yarat">Elan yerləşdirin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 mt-2">
+                    <span class="F-header">Elanlar(100) </span>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllNewPlace">Yeni tikili </a> </li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllOldPlace">Köhnə tikili </a> </li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllHouse">Həyət evi </a> </li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllYardHouse">Bağ evi </a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllGrarage">Qaraj </a> </li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllPlace">Torpaq </a> </li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllPropertyObject">Obyekt </a> </li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="AllOffice">Ofis </a> </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- footer end -->
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        aos.init();
+    </script> -->
+
+
+    @if (ViewBag.Edit == "DüzəlişEt")
+    {
+        <!-- slider plugin-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    }
+
+    <!-- font -->
+    <script src="https://kit.fontawesome.com/c598aedde7.js"></script>
+    <script src="~/jquery/jquery-3.4.1.min.js"></script>
+
+    <script src="~/src/main.js"></script>
+    @if (ViewBag.Home != "Home")
+    {
+        <script src="~/src/header.js"></script>
+    }
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

@@ -1,0 +1,275 @@
+﻿@model Advertisement
+@{
+    ViewData["Title"] = "Yarat";
+}
+
+<section id="createAdvertisement">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4>Elan yerləşdir</h4>
+            </div>
+        </div>
+        <form enctype="multipart/form-data" method="post">
+            <div class="row under-annouce ">
+                <div class="col-12 validation-error" asp-validation-summary="ModelOnly"></div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group ">
+                        <label for="">Elanın növü</label>
+                        <select class="form-control annouce-type" asp-items="@(new SelectList(ViewBag.PropertyCategories, "Id", "Name"))" asp-for="PropertyCategoryId"></select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="PropertyCategoryId"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 ">
+                    <div class="form-group">
+                        <label for="">Əmlakın növü</label>
+                        <select class="form-control mt-1 category" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" asp-for="CategoryId"></select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="CategoryId"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 Room-count ">
+                    <div class="form-group">
+                        <label for="">Otaqların sayi</label>
+                        <select class="form-control mt-1 " asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))" asp-for="RoomId"></select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="RoomId"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12  wide ">
+                    <div class="form-group">
+                        <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
+                        <input class="form-control" placeholder="Sahəsi" asp-for="Area">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Area"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 floor ">
+                    <div class="form-group">
+                        <label for="">Yerləşdiyi mərtəbə</label>
+                        <select class="form-control mt-1 " asp-items="@(new SelectList(ViewBag.Floors, "Id", "Count"))" asp-for="FloorId"></select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="FloorId"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 floor-count  ">
+                    <div class="form-group">
+                        <label for="">Mərtəbə sayı</label>
+                        <select class="form-control mt-1 " asp-items="@(new SelectList(ViewBag.Ranks, "Id", "Count"))" asp-for="RankId"></select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="RankId"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-6  col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">Təmiri</label>
+                                <select class="form-control" asp-items="@(new SelectList(ViewBag.PropertyRepairs, "Id", "Name"))" asp-for="PropertyRepairId"></select>
+                                <div class="validation-error my-2 p-2">
+                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                    <span asp-validation-for="PropertyRepairId"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">Sənədini tipi</label>
+                                <select class="form-control" asp-items="@(new SelectList(ViewBag.PropertyDocuments, "Id", "Name"))" asp-for="PropertyDocumentId"></select>
+                                <div class="validation-error my-2 p-2">
+                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                    <span asp-validation-for="PropertyDocumentId"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="">Qiymət</label>
+                                        <input class="form-control" placeholder="Qiymət" asp-for="Price">
+                                        <div class="validation-error my-2 p-2">
+                                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                            <span asp-validation-for="Price"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group d-none under-annouce-type">
+                                        <label for="">Aylıq </label>
+                                        <select class="form-control" asp-items="@(new SelectList(ViewBag.Rents, "Id", "Name"))" asp-for="RentId"></select>
+                                        <div class="validation-error my-2 p-2">
+                                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                            <span asp-validation-for="RentId"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6  col-12">
+                    <div class="form-group">
+                        <label asp-for="About">Əmlakın təsviri</label>
+                        <textarea class="form-control" rows="10" asp-for="About"></textarea>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="About"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="row">
+                        <div class="col-4">
+                            <select class="form-control my-2 p-2" asp-items="@(new SelectList(ViewBag.NumberKeyCodeOnes, "Id", "Kcode"))" asp-for="NumberKeyCodeId"></select>
+                            <div class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                <span asp-validation-for="NumberKeyCodeId"></span>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control my-2 p-2" placeholder="Nömrə" asp-for="FirstPhoneNumber">
+                            <div class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                <span asp-validation-for="FirstPhoneNumber"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="row  d-none plus-div">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <select class="form-control mt-2" asp-items="@(new SelectList(ViewBag.NumberKeyCodeSecond, "Id", "Kcode"))" asp-for="NumberKeyCodeSecondId"></select>
+                                <div class="validation-error my-2 p-2">
+                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                    <span asp-validation-for="NumberKeyCodeSecondId"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group position-relative">
+                                <input class="form-control   mt-2" placeholder="Növbəti nömrə" asp-for="SecondPhoneNumber">
+                                <div class="validation-error my-2 p-2">
+                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                    <span asp-validation-for="SecondPhoneNumber"></span>
+                                </div>
+                            </div>
+                            <span class="ft-s-a"><i class="fas fa-window-close close-input"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-12 p-0">
+                        <div class="add-phoneNumber Yellow-bg  mt-2  ">
+                            <i class="fas fa-plus mr-3"></i>Əlavə nömrə
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 col-12">
+                    <div class="form-group ">
+                        <label for="">Şəhər</label>
+                        <select class="form-control City" asp-items="@(new SelectList(ViewBag.City, "Id", "Name"))" asp-for="CityId"> </select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="CityId"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 about-city d-none">
+                    <div class="form-group ">
+                        <label for="">Rayon</label>
+                        <select class="form-control regions-select" asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))" asp-for="RegionId">
+                            <option value="0">Rayon seçin</option>  
+                        </select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="RegionId">Rayon daxil edin...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 about-city d-none">
+                    <div class="form-group ">
+                        <label for="">Qəsəbə</label>
+                        <select class="form-control village-select" asp-items="@(new SelectList(ViewBag.Villages, "Id", "Name"))" asp-for="VillageId">
+                            <option value="0">Ərazi seçin</option>
+                        </select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="VillageId">Qəsəbə daxil edin...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 about-city d-none">
+                    <div class="form-group ">
+                        <label for="">Metro</label>
+                        <select class="form-control metro-select " asp-items="@(new SelectList(ViewBag.Metros, "Id", "Name"))" asp-for="MetroId">
+                            <option value="0">Metro seçin</option>
+                        </select>
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="MetroId">Metro daxil edin...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="">Ünvan</label>
+                        <input class="form-control" placeholder="Ünvan" asp-for="Address">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Address"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="IsPremium">Premium et</label>
+                        <input style="height:15px;width:15px" asp-for="IsPremium" class="form-control premium-check" >
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="IsVip">Vip et</label>
+                        <input style="height:15px;width:15px" asp-for="IsVip" class="form-control vip-check" >
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="Imgae-ad-download text-center btn btn-block my-2 orange">
+                            <i class="fas fa-upload mr-3"></i> Şəkil yüklə
+                            <input type="file" hidden class="img-ad-advertisement-down" multiple asp-for="AllPhotos">
+                        </div>
+                    </div>
+                </div>
+                <div class="row Imgae-ad-download-area justify-content-center">
+                </div>
+                <input type="submit" class="btn-block green-bg btn my-2 form-control" value="Elanı yarat">
+</form>
+    </div>
+</section>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

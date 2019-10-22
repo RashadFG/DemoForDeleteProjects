@@ -1,0 +1,1407 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "AnaSəhifə";
+}
+
+<section id="advertisement">
+    <div class="container">
+        <div class="row Advertisement-place justify-content-center search-div-area">
+        </div>
+    </div>
+</section>
+
+<!-- Premium Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-crown mr-2 color-blue"></i> Premium elanlar
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllPremium">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Premium">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.IsPremium == true && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.IsPremium == true && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        @if (item.CategoryId == 1)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 2)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 4)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 3)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 5)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 6)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 7)
+                                        {
+                                            <div class="detail">
+                                                <span> @item.Area m<sup>2</sup> </span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 8)
+                                        {
+                                            <div class="detail">
+                                                <span> @item.Area sot </span> |
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+    </div>
+</section>
+<!-- Premium Advertisement end -->
+
+<!-- Vip Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-gem gem mr-2 color-blue"></i> Vip elanlar
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox1">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end ">
+                <a asp-controller="Elan" asp-action="AllVip">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center VIP">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.IsVip == true && x.PropertyCategoryId == 1).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.IsVip == true && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        @if (item.CategoryId == 1)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 2)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 4)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 3)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 5)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 6)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 7)
+                                        {
+                                            <div class="detail">
+                                                <span> @item.Area m<sup>2</sup> </span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 8)
+                                        {
+                                            <div class="detail">
+                                                <span> @item.Area sot </span> |
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+
+
+    </div>
+</section>
+<!-- Vip Advertisement end -->
+<!-- Agent start -->
+<section id="Agent">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="far fa-handshake
+                        mr-2 color-blue"></i> Agent
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Evimiz" asp-action="Əmlakçılar">Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i></a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center">
+
+            @foreach (var item in Model.Users.Where(x => x.İsAgent == true).OrderByDescending(x => x.RegisterDate).Take(8))
+            {
+                <a asp-controller="Əmlakçılar" asp-action="Profilim" asp-route-id="@item.Id" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="img">
+                                @if (item.AgencyImageUrl == null)
+                                {
+                                    <img src="~/images/Agent/default-logo.png" class="img-fluid w-100">
+                                }
+                                else
+                                {
+                                    <img src="~/images/Agent/@item.AgencyImageUrl" class="img-fluid w-100">
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="about-agent">
+                                <h6>@item.UserName emlak</h6>
+                                <span><i class="fas fa-map-marker-alt"></i> @item.Region.Name</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+<!-- Agent end -->
+<!-- last Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-hourglass-end mr-2 color-blue"></i> Son elanlar
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox2">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllUsual">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Usual">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        @if (item.CategoryId == 1)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 2)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 4)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 3)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 5)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 6)
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 7)
+                                        {
+                                            <div class="detail">
+                                                <span> @item.Area m<sup>2</sup> </span>
+                                            </div>
+                                        }
+                                        else if (item.CategoryId == 8)
+                                        {
+                                            <div class="detail">
+                                                <span> @item.Area sot </span> |
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="detail">
+                                                <span>@item.Room.Count otaqlı </span> |
+                                                <span> @item.Area m<sup>2</sup> </span> |
+                                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                            </div>
+                                        }
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+    </div>
+</section>
+<!-- last Advertisement end -->
+<!-- Yeni tikili Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="far fa-building mr-2 color-blue"></i> Yeni tikililər
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox3">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllNewPlace">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center NewPlace">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 1 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).Count() != -0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 1 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+    </div>
+</section>
+<!-- Yeni tikili Advertisement end -->
+<!-- Köhnə tikili Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="far fa-building mr-2 color-blue"></i> Köhnə tikililər
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox4">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllOldPlace">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center OldPlace">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 2 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 2 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+
+    </div>
+</section>
+<!-- Köhnə tikili Advertisement end -->
+<!-- Həyəyt evi Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-home mr-2 color-blue"></i> Həyəyt evi
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox6">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllHouse">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center House">
+
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 4 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 4 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+
+    </div>
+</section>
+<!-- Həyəyt evi Advertisement end -->
+<!-- Villa Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-hotel mr-2 color-blue"></i> Villa
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox5">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllVilla">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Villa">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 3 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 3 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+    </div>
+</section>
+<!-- Villa Advertisement end -->
+<!-- Bağ evi Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-home mr-2 color-blue"></i> Bağ evi
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox7">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllYardHouse">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center YasrHouse">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 5 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 5 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+    </div>
+</section>
+<!--  Bağ evi Advertisement end -->
+<!-- Ofis Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-mail-bulk mr-2 color-blue"></i> Ofis
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox8">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllOffice">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Office">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 6 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 6 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                } }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+
+    </div>
+</section>
+<!--  Ofis Advertisement end -->
+<!-- Qaraj Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-warehouse mr-2 color-blue"></i> Qaraj
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox9">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllGrarage">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Garage">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 7 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 7 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+
+
+    </div>
+</section>
+<!--  Qaraj Advertisement end -->
+<!-- Torpaq Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-square mr-2 color-blue"></i> Torpaq
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox10">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end ">
+                <a asp-controller="Elan" asp-action="AllPlace">
+                    Hamısını göstər
+                    <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Place">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 8 && x.PropertyCategoryId == 1 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 8 && x.PropertyCategoryId == 1 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span> @item.Area sot </span> |
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+
+
+    </div>
+</section>
+<!--  Torpaq Advertisement end -->
+<!-- Obyekt Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-store mr-2 color-blue"></i> Obyekt
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox11">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <a asp-controller="Elan" asp-action="AllPropertyObject">
+                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center PropertyOnject">
+            @if (Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 9 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).Count() != 0)
+            {
+                @foreach (var item in Model.Advertisements.Where(x => x.IsConfirmed == true && x.CategoryId == 9 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <i class="far fa-heart heart fa-2x  f-empty" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <i class="fas fa-heart heart fa-2x  f-full d-none" data-info="@item.Category.Name@item.Id@item.ApplicationUserId"></i>
+                        <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="img">
+                                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                        @if (item.PropertyCategory.Id == 1)
+                                        {
+                                            <div class="Rent">Satış</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="Sell">Kirayə</div>
+                                        }
+                                        <div class="Price">@item.Price Azn</div>
+                                        @if (item.PropertyDocument.Id == 6)
+                                        {
+                                            <i class="fas fa-file-signature document fa-1x"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="about-advertisement">
+                                        <div class="location">
+                                            <div class="col-12 p-0">
+                                                @if (item.CityId == 10)
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                        <div class="date">
+                                            <span>@item.City.Name,</span>
+                                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                        </div>
+                                        @if (item.IsVip == true)
+                                        {
+                                            <i class="fas fa-gem gem"></i>
+                                        }
+                                        else if (item.IsPremium == true)
+                                        {
+                                            <i class="fas fa-crown premium"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda elan yoxdur</h4>
+            }
+        </div>
+
+    </div>
+</section>
+<!--  Obyekt Advertisement end -->
