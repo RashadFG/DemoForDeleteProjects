@@ -35,14 +35,24 @@ namespace Evimiz.Controllers
         public async Task<IActionResult> AnaSəhifə()
         {
             #region CreateRole:)
-            if (!await _roleManager.RoleExistsAsync("İstifadəçi"))
-            {
-                await _roleManager.CreateAsync(new IdentityRole("İstifadəçi"));
-            }
-
             if (!await _roleManager.RoleExistsAsync("Admin"))
             {
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            if (!await _roleManager.RoleExistsAsync("Moderator"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Moderator"));
+            }
+
+            if (!await _roleManager.RoleExistsAsync("Istifadəçi"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Istifadəçi"));
+            }
+
+            if (!await _roleManager.RoleExistsAsync("Əmlakçı"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Əmlakçı"));
             }
 
             ApplicationUser userAdminExists = await _userManager.FindByNameAsync("Admin");
@@ -55,7 +65,7 @@ namespace Evimiz.Controllers
                     Lastname = "admin",
                     Email = "insinekuliziader@gmail.com",
                     EmailConfirmed = true,
-                    UserName = "admin",
+                    UserName = "Admin",
                     NumberKeyCodeId = 1,
                     NumberKeyCodeSecondId = 1,
                     PhoneNumber = "9876543",
@@ -69,20 +79,7 @@ namespace Evimiz.Controllers
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
 
-            //if (!await _roleManager.RoleExistsAsync("Moderator"))
-            //{
-            //    await _roleManager.CreateAsync(new IdentityRole("Moderator"));
-            //}
 
-            //if (!await _roleManager.RoleExistsAsync("Istifadəçi"))
-            //{
-            //    await _roleManager.CreateAsync(new IdentityRole("Istifadəçi"));
-            //}
-
-            //if (!await _roleManager.RoleExistsAsync("Əmlakçı"))
-            //{
-            //    await _roleManager.CreateAsync(new IdentityRole("Əmlakçı"));
-            //}
             #endregion
 
             ViewBag.Home = "Home";

@@ -28,14 +28,24 @@ namespace Evimiz.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> AdminLogIn()
         {
-            if (!await _roleManager.RoleExistsAsync("İstifadəçi"))
-            {
-                await _roleManager.CreateAsync(new IdentityRole("İstifadəçi"));
-            }
-
             if (!await _roleManager.RoleExistsAsync("Admin"))
             {
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            if (!await _roleManager.RoleExistsAsync("Moderator"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Moderator"));
+            }
+
+            if (!await _roleManager.RoleExistsAsync("Istifadəçi"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Istifadəçi"));
+            }
+
+            if (!await _roleManager.RoleExistsAsync("Əmlakçı"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Əmlakçı"));
             }
 
             ApplicationUser userAdminExists = await _userManager.FindByNameAsync("Admin");
@@ -48,7 +58,7 @@ namespace Evimiz.Areas.Admin.Controllers
                     Lastname = "admin",
                     Email = "insinekuliziader@gmail.com",
                     EmailConfirmed = true,
-                    UserName = "admin",
+                    UserName = "Admin",
                     NumberKeyCodeId = 1,
                     NumberKeyCodeSecondId = 1,
                     PhoneNumber = "9876543",
@@ -58,7 +68,7 @@ namespace Evimiz.Areas.Admin.Controllers
                     RegisterDate = DateTime.Now,
                 };
 
-                await _userManager.CreateAsync(user, "Admin1234@");
+                await _userManager.CreateAsync(user, "https://localhost:44346/Hesab/DaxilOl");
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
 

@@ -346,32 +346,39 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center">
-
-            @foreach (var item in Model.Users.Where(x => x.İsAgent == true).OrderByDescending(x => x.RegisterDate).Take(8))
+            @if (Model.Users.Where(x => x.İsAgent == true).Count() != 0)
             {
-                <a asp-controller="Əmlakçılar" asp-action="Profilim" asp-route-id="@item.Id" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                @if (item.AgencyImageUrl == null)
-                                {
-                                    <img src="~/images/Agent/default-logo.png" class="img-fluid w-100">
-                                }
-                                else
-                                {
-                                    <img src="~/images/Agent/@item.AgencyImageUrl" class="img-fluid w-100">
-                                }
+                @foreach (var item in Model.Users.Where(x => x.İsAgent == true).OrderByDescending(x => x.RegisterDate).Take(8))
+                {
+                    <a asp-controller="Əmlakçılar" asp-action="Profilim" asp-route-id="@item.Id" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="img">
+                                    @if (item.AgencyImageUrl == null)
+                                    {
+                                        <img src="~/images/Agent/default-logo.png" class="img-fluid w-100">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/Agent/@item.AgencyImageUrl" class="img-fluid w-100">
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="about-agent">
+                                    <h6>@item.UserName emlak</h6>
+                                    <span><i class="fas fa-map-marker-alt"></i> @item.Region.Name</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="about-agent">
-                                <h6>@item.UserName emlak</h6>
-                                <span><i class="fas fa-map-marker-alt"></i> @item.Region.Name</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                }
             }
+            else
+            {
+                <h4 style="font-weight: bold" class="error-h4">Hal hazırda əmlakçı yoxdur</h4>
+            }
+
         </div>
     </div>
 </section>

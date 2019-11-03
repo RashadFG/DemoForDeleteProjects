@@ -275,13 +275,13 @@
                             <div class="row">
                                 <div class="col-3">
                                     <div class="agent-img">
-                                        @if (Model.Advertisement.ApplicationUser.UserImageUrl == null)
+                                        @if (Model.Advertisement.ApplicationUser.AgencyImageUrl == null)
                                         {
                                             <img src="~/Images/Agent/default-logo.png" class="img-fluid w-100" />
                                         }
                                         else
                                         {
-                                            <img src="~/Images/Agent/@Model.Advertisement.ApplicationUser.UserImageUrl" class="img-fluid w-100" />
+                                            <img src="~/Images/Agent/@Model.Advertisement.ApplicationUser.AgencyImageUrl" class="img-fluid w-100" />
                                         }
 
                                     </div>

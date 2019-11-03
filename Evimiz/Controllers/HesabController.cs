@@ -21,21 +21,20 @@ namespace Evimiz.Controllers
         private readonly IConfiguration _configuration;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IHostingEnvironment _env;
-        //private readonly RoleManager<İstifadəçi> _roleManager;
 
         public HesabController(Db_Evimiz context,
                                UserManager<ApplicationUser> usermanager,
                                IConfiguration configuration,
                                SignInManager<ApplicationUser> signInManager,
                                IHostingEnvironment env
-                             /*  RoleManager<İstifadəçi> roleManager*/)
+                           )
         {
             _context = context;
             _usermanager = usermanager;
             _configuration = configuration;
             _signInManager = signInManager;
             _env = env;
-            //_roleManager = roleManager;
+           
         }
 
         public IActionResult Seçim()
@@ -138,7 +137,6 @@ namespace Evimiz.Controllers
             {
                 if (registerViewModel.UserPhoto != null)
                 {
-                    user.İsUser = true;
                     if (registerViewModel.UserPhoto.ContentType.Contains("image/jpg")
                     || registerViewModel.UserPhoto.ContentType.Contains("image/jpeg"))
                     {
@@ -159,7 +157,6 @@ namespace Evimiz.Controllers
             {
                 if (registerViewModel.AgencyPhoto != null)
                 {
-                    user.İsAgent = true;
                     if (registerViewModel.AgencyPhoto.ContentType.Contains("image/jpg")
                     || registerViewModel.AgencyPhoto.ContentType.Contains("image/jpeg"))
                     {
@@ -181,7 +178,6 @@ namespace Evimiz.Controllers
 
             if (!result.Succeeded)
             {
-
                 ViewBag.NumberKeyCode = _context.NumberKeyCodes.ToList();
                 ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS.ToList();
 
@@ -202,13 +198,12 @@ namespace Evimiz.Controllers
             {
                 if (userrole == "İstifadəçi")
                 {
-                    //Add Admin from here
-                    //await _usermanager.AddToRoleAsync(user, "Admin");
-
+                    user.İsUser = true;
                     await _usermanager.AddToRoleAsync(user, "Istifadəçi");
                 }
                 else if (userrole == "Əmlakçı")
                 {
+                    user.İsAgent = true;
                     await _usermanager.AddToRoleAsync(user, "Əmlakçı");
                 }
             }
@@ -222,7 +217,7 @@ namespace Evimiz.Controllers
             message.IsBodyHtml = true;
             message.Subject = "Hesabın təsdiqlənməsi";
             message.Body = $"<a href='https://localhost:44346/Hesab/EmailYoxlanışı?id={user.Id}'>Xahiş edirik hesabınızı təsdiqləyəsiniz</a>";
-            client.Send(message);
+             client.Send(message);
 
             return RedirectToAction("DaxilOl", "Hesab");
         }
@@ -283,7 +278,7 @@ namespace Evimiz.Controllers
             message.IsBodyHtml = true;
             message.Subject = "Hesabın təsdiqlənməsi";
             message.Body = $"<a href='https://localhost:44346/Hesab/Şifrəniyenilə?userId={user.Id}&passwordResetToken={passwordResetToken}'>Hesabınızı pərpa edin</a>";
-            client.Send(message);
+             client.Send(message);
 
             TempData["ForgotPassword"] = true;
             return View();

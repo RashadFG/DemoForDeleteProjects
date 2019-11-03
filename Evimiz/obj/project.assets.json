@@ -12877,11 +12877,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fuad\\Desktop\\R\\Evimiz.az\\Evimiz\\Evimiz.csproj",
+      "projectUniqueName": "D:\\R -Copy 2 - Copy\\Evimiz.az\\Evimiz\\Evimiz.csproj",
       "projectName": "Evimiz",
-      "projectPath": "C:\\Users\\Fuad\\Desktop\\R\\Evimiz.az\\Evimiz\\Evimiz.csproj",
+      "projectPath": "D:\\R -Copy 2 - Copy\\Evimiz.az\\Evimiz\\Evimiz.csproj",
       "packagesPath": "C:\\Users\\Fuad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Fuad\\Desktop\\R\\Evimiz.az\\Evimiz\\obj\\",
+      "outputPath": "D:\\R -Copy 2 - Copy\\Evimiz.az\\Evimiz\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
